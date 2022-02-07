@@ -1,0 +1,17 @@
+* {
+    font-family: Tahoma, sans-serif;
+}
+.name {
+    font-size: 40px;
+    font-family: Verdana, sans-serif;
+}
+
+.profile-picture {
+    width: 120px;
+}
+
+.title {
+    color: #16315c;
+    font-size: 25px;
+    font-family: Verdana, sans-serif;
+}
