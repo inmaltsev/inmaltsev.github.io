@@ -1,106 +1,154 @@
 * {
-    font-family: Tahoma, sans-serif;
+  font-family: Tahoma, sans-serif;
 }
 
 .wrapper {
-    padding: 0px 40px;
-    padding-bottom: 66px;
-    width: calc(100% - 40px * 2);
+  padding: 0px 40px;
+  padding-bottom: 66px;
+  margin-left: 230px;
+  width: calc(100% - 230px - 40px * 2);
 }
 
 header {
-    padding: 20px 0;
+  padding: 20px 0;
+}
+
+aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 40px;
+  width: 150px;
+}
+
+aside p {
+  margin-bottom: 30px;
+}
+
+aside address ul li {
+  margin: 15px 0;
 }
 
 section {
-    padding: 30px 0;
-    border-top: 2px solid rgb(192, 192, 192);
+  padding: 30px 0;
+  border-top: 2px solid rgb(192, 192, 192);
 }
 
 .name {
-    margin: 15px 0;
-    font-size: 44px;
-    font-family: Verdana, sans-serif;
+  margin: 15px 0;
+  font-size: 44px;
+  font-family: Verdana, sans-serif;
 }
 
 .job-position {
-    margin: 10px 0;
-    color: #000;
-    font-size: 30px;
-    font-family: Verdana, sans-serif;
-    font-style: italic;
+  margin: 10px 0;
+  color: #000;
+  font-size: 30px;
+  font-family: Verdana, sans-serif;
+  font-style: italic;
 }
 
 .profile-picture {
-    float: left;
-    margin-right: 20px;
-    width: 120px;
+  float: left;
+  margin-right: 20px;
+  width: 120px;
 }
 
 .float-separator {
-    display: block;
-    clear: left;
+  display: block;
+  clear: left;
 }
 
 .title {
-    margin-bottom: 45px;
-    color: #000;
-    font-size: 27px;
-    font-family: Verdana, sans-serif;
-    font-style: italic;
+  margin-bottom: 45px;
+  color: #000;
+  font-size: 27px;
+  font-family: Verdana, sans-serif;
+  font-style: italic;
 }
 
 .skills-list {
-    width: 100%;
+  width: 100%;
 }
 
 .skills-item {
-    float: left;
-    width: calc(100% / 3 - 20px * 2);
-    padding: 30px 20px;
-    text-align: left;
-    
+  float: left;
+  width: calc(100% / 3 - 20px * 2);
+  padding: 30px 20px;
+  text-align: left;
 }
 
 .experience-table {
-    width: 100%;
+  width: 100%;
 }
 
 .experience-table .record {
-    position: relative;
-    display: block;
-    padding: 10px 0;
+  position: relative;
+  display: block;
+  padding: 10px 0;
 }
 
 .experience-table .occupation {
-    padding: 10px 10px;
-    width: 100%;
+  padding: 10px 10px;
+  width: 100%;
 }
 
 .experience-table .years {
-    position: absolute;
-    top: -1px;
-    right: 0;
+  position: absolute;
+  top: -1px;
+  right: 0;
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
-    padding: 25px 40px;
-    width: 100%;
-    background-color:rgb(200, 198, 198);
+  position: fixed;
+  bottom: 0;
+  padding: 25px 40px;
+  width: 100%;
+  background-color: rgb(200, 198, 198);
 }
 
 footer .contacts * {
-    float: left;
-    width: calc(50% - 40px);
+  float: left;
+  width: calc(50% - 40px);
 }
 
 footer .email {
-    text-align: left;
+  text-align: left;
 }
 
 footer .repo-link {
-    text-align: right;
-    color: rgb(185, 106, 31);
+  text-align: right;
+  color: rgb(185, 106, 31);
+}
+
+@media (max-width: 1000px) {
+  .skills-item {
+    width: calc(100% / 2 - 20px * 2);
+  }
+}
+
+@media (max-width: 700px) {
+  .skills-item {
+    width: calc(100% - 20px * 2);
+  }
+
+  aside {
+    position: static;
+    margin-bottom: 60px;
+    width: calc(100% - 40px * 2);
+    border-top: 2px solid rgb(192, 192, 192);
+  }
+
+  .wrapper {
+    margin-left: 0;
+    width: calc(100% - 40px * 2);
+  }
+}
+
+@media (max-width: 400px) {
+  footer .contacts * {
+    float: none;
+    margin-bottom: 10px;
+    width: calc(100% - 80px);
+  }
 }
