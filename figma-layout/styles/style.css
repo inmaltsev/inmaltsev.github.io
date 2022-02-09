@@ -277,8 +277,8 @@ footer .top-button a img {
   .content-section,
   header,
   footer {
-    padding: 90px 100px;
-    width: calc(100% - 100px * 2);
+    padding: 95px 160px;
+    width: calc(100% - 160px * 2);
   }
 
   .menu-icon {
@@ -286,13 +286,13 @@ footer .top-button a img {
   }
 
   .logo {
-    width: calc(50% - 50px);
+    width: calc(40% - 50px);
     text-align: left;
   }
 
   .menu {
     display: flex;
-    width: 50%;
+    width: 60%;
   }
 
   .menu ul {
@@ -300,6 +300,10 @@ footer .top-button a img {
     flex-flow: row wrap;
     justify-content: space-between;
     width: 100%;
+  }
+
+  .menu li a {
+    text-decoration: none;
   }
 
   header .introduction {
