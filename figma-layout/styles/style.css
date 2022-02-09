@@ -1,9 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap");
 * {
   --primary-color: #c66c49;
   --primary-color-light: #f5d6ab;
   --primary-color-dark: #8b4136;
 
-  --background-color: #f5d6ab;
+  --background-img: #c66c4960;
+  --background-color: #fffaf2;
   --background-color-light: #fffaf2;
 
   --text-color: #828282;
@@ -12,6 +14,234 @@
 
   --text-font: "Libre Franklin";
 
-  --heading-size: 36px;
-  --text-size: 24px;
+  --heading-size: 24px;
+  --subtitle-size: 20px;
+  --text-size: 14px;
+
+  color: var(--text-color-dark);
+  font-family: var(--text-font);
+  font-size: var(--text-size);
+  line-height: 20px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+header,
+footer {
+  padding: 0 35px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: var(--heading-size);
+  font-weight: 600;
+  color: var(--text-color-dark);
+}
+
+h4 {
+  font-size: var(--subtitle-size);
+  text-align: center;
+}
+
+h5 {
+  margin-bottom: 15px;
+  font-size: 16px;
+  text-align: center;
+}
+
+header {
+  padding: 30px;
+  width: calc(100% - 70px);
+  display: flex;
+  flex-flow: row wrap;
+  background-color: var(--background-color);
+  background: linear-gradient(var(--background-img), var(--background-img)),
+    url("../img/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header * {
+  color: var(--text-color-light);
+  font-family: var(--text-font);
+}
+
+.content-section {
+  padding: 25px 30px;
+}
+
+.menu-icon {
+  display: flex;
+  align-items: center;
+}
+.menu-icon img {
+  width: 25px;
+}
+
+.logo {
+  --burger-width: 25px;
+  width: calc(100% - var(--burger-width) * 2);
+  padding-right: var(--burger-width);
+  margin: 0;
+  text-align: center;
+}
+
+.menu {
+  display: none;
+}
+
+header .introduction {
+  margin-top: 50px;
+  width: 100%;
+  text-align: center;
+}
+
+header .greetings {
+  margin-bottom: 15px;
+}
+
+header .description {
+  margin-bottom: 40px;
+}
+
+header .works-link {
+  margin-bottom: 15px;
+}
+
+.content-section.skills {
+  background-color: var(--background-color);
+}
+
+.author-img {
+  padding: 0 50px;
+  margin-bottom: 25px;
+  width: calc(100% - 50px * 2);
+}
+
+.author-img img {
+  width: 100%;
+}
+
+.skills-item {
+  margin-bottom: 25px;
+}
+
+.skill-estimation,
+.skill-tools {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.skill-name,
+.tools-name {
+  margin-right: 15px;
+  width: calc(35% - 15px);
+  font-weight: 700;
+}
+
+.skill-measure,
+.tools-items {
+  width: 65%;
+}
+
+.measure-line {
+  width: 100%;
+  height: 18px;
+  background-color: var(--primary-color-light);
+}
+
+.measure-line .measure-filled {
+  width: 0;
+  height: 100%;
+  background-color: var(--primary-color);
+}
+
+#skill-front {
+  width: 65%;
+}
+
+#skill-ui {
+  width: 75%;
+}
+
+.portfolio-photos {
+  margin-top: 35px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.portfolio-photos li {
+  --margin-size: 15px;
+  width: calc(50% - var(--margin-size));
+}
+
+.portfolio-photos li:nth-child(2n) {
+  margin-left: var(--margin-size);
+}
+
+.portfolio-photo-container {
+  margin-bottom: var(--margin-size);
+  width: 100%;
+}
+
+.portfolio-photo-container img {
+  width: 100%;
+}
+
+.socials {
+  margin-top: 10px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.socials-item {
+  --margin-size: 20px;
+  margin-bottom: var(--margin-size);
+  margin-right: var(--margin-size);
+  width: calc(50% - var(--margin-size));
+}
+
+.socials-item a {
+  text-decoration: none;
+}
+
+footer {
+  background-color: var(--background-color);
+}
+
+footer .contact-meta {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+footer .contact-info {
+  display: flex;
+  flex-flow: column;
+  width: 60%;
+}
+
+footer .contact-info li {
+  margin-top: 10px;
+}
+
+footer .top-button {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 40%;
+  text-align: right;
+}
+
+footer .top-button a {
+  width: 25px;
+  height: 25px;
+}
+
+footer .top-button a img {
+  width: 100%;
 }
