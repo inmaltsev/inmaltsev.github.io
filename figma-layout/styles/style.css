@@ -1,0 +1,17 @@
+* {
+  --primary-color: #c66c49;
+  --primary-color-light: #f5d6ab;
+  --primary-color-dark: #8b4136;
+
+  --background-color: #f5d6ab;
+  --background-color-light: #fffaf2;
+
+  --text-color: #828282;
+  --text-color-light: #ffffff;
+  --text-color-dark: #333333;
+
+  --text-font: "Libre Franklin";
+
+  --heading-size: 36px;
+  --text-size: 24px;
+}
