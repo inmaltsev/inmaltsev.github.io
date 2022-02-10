@@ -16,21 +16,16 @@
 
   --heading-size: 24px;
   --subtitle-size: 20px;
-  --text-size: 14px;
+  --text-size: 12px;
 
   color: var(--text-color-dark);
   font-family: var(--text-font);
   font-size: var(--text-size);
-  line-height: 20px;
+  line-height: 16px;
 }
 
 html {
   scroll-behavior: smooth;
-}
-
-header,
-footer {
-  padding: 0 35px;
 }
 
 h2 {
@@ -54,7 +49,7 @@ h5 {
 }
 
 header {
-  padding: 30px;
+  padding: 40px 30px;
   width: calc(100% - 60px);
   display: flex;
   flex-flow: row wrap;
@@ -71,7 +66,8 @@ header * {
 }
 
 .content-section {
-  padding: 25px 30px;
+  padding: 30px;
+  width: calc(100% - 30px * 2);
 }
 
 .menu-icon {
@@ -112,14 +108,16 @@ header .works-link {
   margin-bottom: 15px;
 }
 
-.content-section.skills {
+.skills {
+  padding-top: 20px;
+  padding-bottom: 5px;
   background-color: var(--background-color);
 }
 
 .author-img {
-  padding: 0 50px;
-  margin-bottom: 25px;
-  width: calc(100% - 50px * 2);
+  padding: 0 45px;
+  margin: 30px 0;
+  width: calc(100% - 45px * 2);
   text-align: center;
 }
 
@@ -131,24 +129,32 @@ header .works-link {
   margin-bottom: 25px;
 }
 
+.skills-description li:last-child {
+  margin-bottom: 0;
+}
+
 .skill-estimation,
 .skill-tools {
   display: flex;
   flex-flow: row wrap;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   width: 100%;
+}
+
+.skill-tools {
+  margin-bottom: 0;
 }
 
 .skill-name,
 .tools-name {
-  margin-right: 15px;
-  width: calc(35% - 15px);
+  width: 30%;
   font-weight: 700;
 }
 
 .skill-measure,
 .tools-items {
-  width: 65%;
+  margin-left: 5px;
+  width: calc(70% - 5px);
 }
 
 .measure-line {
@@ -163,6 +169,10 @@ header .works-link {
   background-color: var(--primary-color);
 }
 
+#skill-profile {
+  margin-bottom: 40px;
+}
+
 #skill-front {
   width: 65%;
 }
@@ -171,19 +181,29 @@ header .works-link {
   width: 75%;
 }
 
+.portfolio h2 {
+  margin-bottom: 30px;
+}
+
+.portfolio-content {
+  margin-top: 20px;
+}
+
 .portfolio-photos {
-  margin-top: 35px;
+  margin-top: 25px;
   display: flex;
   flex-flow: row wrap;
+  width: 100%;
 }
 
 .portfolio-photos li {
   --margin-size: 15px;
-  width: calc(50% - var(--margin-size));
+  width: 55%;
 }
 
 .portfolio-photos li:nth-child(2n) {
   margin-left: var(--margin-size);
+  width: calc(45% - var(--margin-size));
 }
 
 .portfolio-photo-container {
@@ -191,12 +211,16 @@ header .works-link {
   width: 100%;
 }
 
+.portfolio-photo-container:last-child {
+  margin-bottom: 0;
+}
+
 .portfolio-photo-container img {
   width: 100%;
 }
 
 .social-contacts {
-  margin-top: 50px;
+  margin-top: 25px;
   display: flex;
   flex-flow: row wrap;
 }
@@ -213,6 +237,7 @@ header .works-link {
 }
 
 footer {
+  padding: 25px 40px;
   background-color: var(--background-color);
 }
 
@@ -281,34 +306,13 @@ footer .top-button a img {
     width: calc(100% - 160px * 2);
   }
 
-  .menu-icon {
-    display: none;
-  }
-
-  .logo {
-    width: calc(40% - 50px);
-    text-align: left;
-  }
-
-  .menu {
-    display: flex;
-    width: 60%;
-  }
-
-  .menu ul {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .menu li a {
-    text-decoration: none;
+  .content-section {
+    padding-bottom: 145px;
   }
 
   header .introduction {
     margin-top: 150px;
-    margin-bottom: 200px;
+    margin-bottom: 135px;
   }
 
   .introduction * {
@@ -316,20 +320,145 @@ footer .top-button a img {
   }
 
   .greetings {
-    font-size: 60px;
+    font-size: 65px;
+  }
+
+  .description {
+    margin-top: 40px;
+    font-size: 23px;
+  }
+
+  .works-link {
+    margin-top: 110px;
   }
 
   .skills {
     display: flex;
     flex-flow: row wrap;
+    padding-top: 85px;
   }
 
   .skills h2 {
+    margin-bottom: 85px;
     width: 100%;
   }
 
-  .author-img {
+  .skills-item {
+    margin-bottom: 15px;
+  }
+
+  .skill-estimation {
+    margin-bottom: 15px;
+  }
+
+  .skills-description {
+    width: 100%;
+  }
+
+  #skill-profile {
+    margin-bottom: 60px;
+  }
+
+  .measure-line {
+    height: 25px;
+  }
+
+  .portfolio {
+    padding-top: 90px;
+  }
+
+  .portfolio h5 {
+    margin-top: 80px;
+  }
+
+  .portfolio-content {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .portfolio-content p {
     margin-right: 125px;
+    width: calc(45% - 125px);
+  }
+
+  .portfolio-photos {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+    width: 55%;
+  }
+
+  .portfolio-photos li:last-child {
+    margin-left: 30px;
+    width: calc(45% - 30px);
+  }
+
+  footer h2 {
+    margin-bottom: 45px;
+  }
+
+  .contacts {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .contacts h2 {
+    width: 100%;
+  }
+
+  .social-contacts {
+    margin-top: 0;
+    width: 70%;
+  }
+
+  .socials-item {
+    margin-bottom: 7px;
+  }
+
+  .contact-meta {
+    margin-top: 0;
+    width: 30%;
+  }
+
+  footer .contact-info li {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .menu-icon {
+    display: none;
+  }
+
+  .logo {
+    width: calc(50% - 50px);
+    text-align: left;
+  }
+
+  .menu {
+    display: flex;
+    width: 50%;
+  }
+
+  .menu ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .menu li a {
+    text-decoration: none;
+  }
+
+  .author-img {
+    width: calc(45% - 125px);
+  }
+
+  .author-img {
+    margin: 0 125px;
+    margin-left: 0;
     padding: 0;
     width: calc(55% - 125px);
   }
@@ -341,38 +470,26 @@ footer .top-button a img {
   .skills-description {
     width: 45%;
   }
-
-  .portfolio-content {
-    display: flex;
-    flex-flow: row wrap;
-  }
-
-  .portfolio-content p {
-    margin-right: 125px;
-    width: calc(50% - 125px);
-  }
-
-  .portfolio-photos {
-    margin: 0;
-    padding: 0;
-    width: 50%;
-  }
-}
-
-@media screen and (min-width: 1100px) {
-  .author-img {
-    width: calc(45% - 125px);
-  }
 }
 
 @media screen and (min-width: 1250px) {
   .author-img {
-    width: calc(35% - 125px);
+    width: calc(43% - 125px);
+    padding: 0;
+    margin-right: 125px;
+  }
+
+  .skills-description {
+    width: 57%;
   }
 }
 
 @media screen and (min-width: 1700px) {
   .author-img {
     width: calc(30% - 125px);
+  }
+
+  .skills-description {
+    width: 70%;
   }
 }
