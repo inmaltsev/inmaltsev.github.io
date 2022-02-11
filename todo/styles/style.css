@@ -42,7 +42,7 @@ h1 {
   margin-bottom: 50px;
 }
 
-.todolist__task-input[done="true"] + label * {
+.todolist__task-input[done="true"] ~ label * {
   text-decoration: line-through;
   color: #33333360;
 }
