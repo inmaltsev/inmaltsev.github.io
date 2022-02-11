@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap");
+* {
+  --primary-color: #c66c49;
+  --primary-color-light: #f5d6ab;
+  --primary-color-dark: #8b4136;
+
+  --background-color: #fffaf2;
+  --background-color-light: #fffaf2;
+
+  --text-color: #828282;
+  --text-color-light: #ffffff;
+  --text-color-dark: #333333;
+
+  --text-font: "Libre Franklin";
+
+  --heading-size: 24px;
+  --subtitle-size: 20px;
+  --text-size: 12px;
+
+  color: var(--text-color-dark);
+  font-family: var(--text-font);
+  font-size: var(--text-size);
+  line-height: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+main {
+  padding: 30px;
+}
+
+h1 {
+  margin-bottom: 50px;
+}
+
+.todolist__task-input[done="true"] + label * {
+  text-decoration: line-through;
+  color: #33333360;
+}
+
+.todolist__task-name {
+  font-size: large;
+  color: #000000;
+}
+
+.todolist__task-description {
+  font-size: 14px;
+  color: #5f5757;
+}
+
+.todolist__task-date[expired="true"] {
+  background-color: red !important;
+}
