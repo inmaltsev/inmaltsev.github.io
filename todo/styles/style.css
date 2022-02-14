@@ -42,7 +42,7 @@ h1 {
   margin-bottom: 50px;
 }
 
-.todolist__task-input[done="true"] ~ label * {
+.todolist__task[done="true"] * {
   text-decoration: line-through;
   color: #33333360;
 }
@@ -59,4 +59,12 @@ h1 {
 
 .todolist__task-date[expired="true"] {
   background-color: red !important;
+}
+
+.todolist__task-delete {
+  margin-left: 20px;
+}
+
+.none {
+  display: none;
 }
