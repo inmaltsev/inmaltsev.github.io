@@ -68,3 +68,11 @@ h1 {
 .none {
   display: none;
 }
+
+.create-task {
+  margin-bottom: 45px;
+}
+
+input.invalid {
+  border: 1px solid red;
+}
