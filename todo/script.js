@@ -51,7 +51,7 @@ const list = [
 
 const taskListElement = document.getElementById("taskList");
 
-function generateTaskDomObject(task) {
+function addTaskToDom(task) {
   const { id, name, description, done, dueDate } = task;
   const isExpired = isDateExpired(dueDate);
   const dateText = dueDate
@@ -84,18 +84,28 @@ function generateTaskDomObject(task) {
 function handleClick(taskElem) {
   const allClasses = event.target.classList;
   allClasses.includes = [].includes;
-  if (allClasses.includes("form-check-input")) {
-    const oldValue = taskElem.getAttribute("done") === "true";
-    taskElem.setAttribute("done", !oldValue);
-    displayTasksAccordingToQuery();
-  } else if (allClasses.includes("todolist__task-delete")) {
-    const taskId = parseInt(taskElem.getAttribute("id"));
-    const taskIndex = list.findIndex((task) => task.id === taskId);
-    list.splice(taskIndex, 1);
 
-    taskElem.remove();
-    console.log(list);
+  if (allClasses.includes("form-check-input")) {
+    changeTaskState(taskElem);
+  } else if (allClasses.includes("todolist__task-delete")) {
+    deleteTask(taskElem);
   }
+}
+
+function deleteTask(taskElem) {
+  const taskId = parseInt(taskElem.getAttribute("id"));
+  const taskIndex = list.findIndex((task) => task.id === taskId);
+  list.splice(taskIndex, 1);
+
+  taskElem.remove();
+  console.log(list);
+}
+
+function changeTaskState(taskElem) {
+  const oldValue = taskElem.getAttribute("done") === "true";
+  taskElem.setAttribute("done", !oldValue);
+
+  displayTasksAccordingToQuery();
 }
 
 function isDateExpired(date) {
@@ -109,7 +119,7 @@ function isDateExpired(date) {
   }
 }
 
-list.forEach((task) => generateTaskDomObject(task));
+list.forEach((task) => addTaskToDom(task));
 
 const showOnlyCompletedButton = document.getElementById("show-all");
 showOnlyCompletedButton.addEventListener("click", (event) => {
@@ -127,42 +137,48 @@ function displayTasksAccordingToQuery() {
 function hideCompletedTasks() {
   const allTasks = taskListElement.children;
   allTasks.forEach = [].forEach;
-  allTasks.forEach((task) => {
-    const isDone = task.getAttribute("done") === "true";
-    if (isDone) {
-      task.classList.toggle("none", true);
-    }
-  });
+  allTasks.forEach(hideUndoneTask);
+}
+
+function hideUndoneTask(task) {
+  const isDone = task.getAttribute("done") === "true";
+  if (isDone) {
+    task.classList.toggle("none", true);
+  }
 }
 
 function showAllTasks() {
   const allTasks = taskListElement.children;
   allTasks.forEach = [].forEach;
-  allTasks.forEach((task) => task.classList.toggle("none", false));
+  allTasks.forEach(makeTaskVisible);
+}
+
+function makeTaskVisible(task) {
+  task.classList.toggle("none", false);
 }
 
 const createTaskForm = document.forms.createTask;
 createTaskForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const formData = new FormData(createTaskForm);
-  const createdTask = Object.fromEntries(formData);
+  const formData = Object.fromEntries(new FormData(createTaskForm));
 
-  const nameInput = document.getElementsByClassName(
-    "todolist__create-task--name"
-  )[0];
+  const nameInput = document.getElementById("taskNameInput");
 
-  if (!createdTask.name) {
-    nameInput.classList.toggle("invalid", true);
-  } else {
+  if (isFormValid(formData)) {
     nameInput.classList.toggle("invalid", false);
     createTaskForm.reset();
 
-    createdTask.dueDate = createdTask.dueDate
-      ? new Date(createdTask.dueDate)
-      : null;
+    const createdTask = Object.assign(formData);
+    createdTask.dueDate = formData.dueDate ? new Date(formData.dueDate) : null;
 
     list.push(createdTask);
-    generateTaskDomObject(createdTask);
+    addTaskToDom(createdTask);
+  } else {
+    nameInput.classList.toggle("invalid", true);
   }
 });
+
+function isFormValid(formData) {
+  return formData.name;
+}
