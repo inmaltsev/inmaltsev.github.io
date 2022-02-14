@@ -55,7 +55,7 @@ function generateTaskDomObject(task) {
   const { id, name, description, done, dueDate } = task;
   const isExpired = isDateExpired(dueDate);
   const dateText = dueDate
-    ? dueDate.getFullYear() + "-" + dueDate.getMonth() + "-" + dueDate.getDate()
+    ? dueDate.getDate() + "-" + dueDate.getMonth() + "-" + dueDate.getFullYear()
     : "";
   taskListElement.innerHTML += `
     <li class="form-check container todolist__task" id="${id}" done="${done}" onclick="handleClick(this)">
