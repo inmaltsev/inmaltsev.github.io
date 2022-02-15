@@ -72,7 +72,30 @@
         </div>
       </div>
 
-      <ul class="todolist" id="taskList"></ul>
+      <ul class="todolist" id="taskList">
+        <template id="taskTemplate">
+          <li class="form-check container todolist__task">
+            <input
+              type="checkbox"
+              class="form-check-input todolist__task-input"
+            />
+
+            <label class="form-check-label todolist__task">
+              <p class="todolist__task-name"></p>
+              <p class="todolist__task-description"></p>
+            </label>
+
+            <span
+              class="todolist__task-date badge rounded-pill bg-primary"
+              expired=""
+            >
+            </span>
+            <button class="todolist__task-delete btn btn-secondary">
+              Delete
+            </button>
+          </li>
+        </template>
+      </ul>
     </main>
   </body>
 

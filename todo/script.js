@@ -51,47 +51,58 @@ const taskList = [
 
 const taskListElement = document.getElementById("taskList");
 
+// DOM
 function addTaskToDom(task) {
   const { id, name, description, done, dueDate } = task;
   const isExpired = isDateExpired(dueDate);
   const dateText = dueDate
     ? dueDate.getDate() + "-" + dueDate.getMonth() + "-" + dueDate.getFullYear()
     : "";
-  taskListElement.innerHTML += `
-    <li class="form-check container todolist__task" id="${id}" done="${done}" onclick="handleClick(this)">
-        <input
-          type="checkbox"
-          class="form-check-input todolist__task-input" ${done ? "checked" : ""}
-          
-        />
-        
-        <label class="form-check-label todolist__task"> 
-          <p class="todolist__task-name">${name}</p>
-          <p class="todolist__task-description">${description}</p>
-        </label>
 
-        <span
-        class="todolist__task-date badge rounded-pill bg-primary"
-        expired="${isExpired}"
-        >
-        ${dateText}
-        </span>
-        <button class="todolist__task-delete btn btn-secondary">Delete</button>
-    </li>
-  `;
+  const browserSupportsTemplate =
+    "content" in document.createElement("template");
+
+  if (browserSupportsTemplate) {
+    const template = document.querySelector("#taskTemplate");
+    const taskElement = template.content.cloneNode(true).children[0];
+    const checkbox = taskElement.querySelector(".todolist__task-input");
+    const nameField = taskElement.querySelector(".todolist__task-name");
+    const descriptionField = taskElement.querySelector(
+      ".todolist__task-description"
+    );
+    const dateField = taskElement.querySelector(".todolist__task-date");
+
+    taskElement.setAttribute("id", id);
+    taskElement.setAttribute("done", done);
+    taskElement.setAttribute("onclick", "handleClick(this)");
+
+    checkbox.checked = done;
+
+    nameField.textContent = name;
+    descriptionField.textContent = description;
+
+    dateField.setAttribute("expired", isExpired);
+    dateField.textContent = dateText;
+
+    taskListElement.appendChild(taskElement);
+  }
 }
 
+// EVENT
 function handleClick(taskElem) {
+  console.log("click");
   const allClasses = event.target.classList;
   allClasses.includes = [].includes;
 
   if (allClasses.includes("form-check-input")) {
     changeTaskState(taskElem);
   } else if (allClasses.includes("todolist__task-delete")) {
+    // COMB
     deleteTask(taskElem);
   }
 }
 
+// COMB
 function deleteTask(taskElem) {
   const taskId = parseInt(taskElem.getAttribute("id"));
   const taskIndex = taskList.findIndex((task) => task.id === taskId);
@@ -101,6 +112,7 @@ function deleteTask(taskElem) {
   console.log(taskList);
 }
 
+// COMB : update task
 function changeTaskState(taskElem) {
   const oldValue = taskElem.getAttribute("done") === "true";
   taskElem.setAttribute("done", !oldValue);
@@ -119,6 +131,7 @@ function isDateExpired(date) {
   }
 }
 
+// DOM
 function displayTasksAccordingToQuery() {
   if (showOnlyCompletedButton.checked) {
     hideCompletedTasks();
@@ -150,13 +163,16 @@ function makeTaskVisible(task) {
   task.classList.toggle("none", false);
 }
 
+// DOM
 taskList.forEach((task) => addTaskToDom(task));
 
+// EVENT
 const showOnlyCompletedButton = document.getElementById("show-all");
 showOnlyCompletedButton.addEventListener("click", (event) => {
   displayTasksAccordingToQuery();
 });
 
+// EVENT
 const createTaskForm = document.forms.createTask;
 createTaskForm.addEventListener("submit", (event) => {
   event.preventDefault();
