@@ -69,7 +69,7 @@ function addTaskToDom(task) {
     dateField.textContent =
       taskDate.getFullYear() +
       "-" +
-      taskDate.getMonth() +
+      (taskDate.getMonth() + 1) +
       "-" +
       taskDate.getDate();
 
