@@ -1,5 +1,6 @@
 const tasksEndpoint = "http://localhost:3000/lists/5195/tasks";
 
+// DB
 function getTasksFromServer() {
   return fetch(tasksEndpoint + "?all=true").then((res) => res.json());
 }
@@ -37,10 +38,10 @@ function createTask(newTask) {
 
 const taskListElement = document.getElementById("taskList");
 
-// DOM:only
+// DOM
 function addTaskToDom(task) {
   const { id, text, done, dueDate } = task;
-  const taskDate = new Date(dueDate);
+  const taskDate = dueDate ? new Date(dueDate) : null;
   const isExpired = isDateExpired(taskDate);
 
   const browserSupportsTemplate =
@@ -66,14 +67,18 @@ function addTaskToDom(task) {
     descriptionField.textContent = text;
 
     dateField.setAttribute("expired", isExpired);
-    dateField.textContent =
-      taskDate.getFullYear() +
-      "-" +
-      (taskDate.getMonth() + 1) +
-      "-" +
-      taskDate.getDate();
-
+    dateField.textContent = getDateText(taskDate);
     taskListElement.appendChild(taskElement);
+  }
+}
+
+function getDateText(date) {
+  if (date) {
+    return (
+      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+    );
+  } else {
+    return "";
   }
 }
 
@@ -96,7 +101,6 @@ function handleClick(taskElem) {
   if (allClasses.includes("form-check-input")) {
     changeTaskState(taskElem);
   } else if (allClasses.includes("todolist__task-delete")) {
-    // COMB
     deleteTask(taskElem);
   }
 }
@@ -129,7 +133,6 @@ function changeTaskState(taskElem) {
     dueDate: new Date(date),
   };
   updateTask(editedTask);
-  console.log(editedTask);
 
   taskElem.setAttribute("done", newDoneValue);
 
@@ -168,7 +171,7 @@ function makeTaskVisible(task) {
   task.classList.toggle("none", false);
 }
 
-// SERVER
+// DOM
 getTasksFromServer().then((res) => res.forEach((task) => addTaskToDom(task)));
 
 // EVENT
@@ -190,16 +193,20 @@ createTaskForm.addEventListener("submit", async (event) => {
     nameInput.classList.toggle("invalid", false);
     createTaskForm.reset();
 
-    const createdTask = Object.assign(formData);
-    createdTask.dueDate = formData.dueDate ? new Date(formData.dueDate) : null;
+    const newTask = convertFormDataToTask(formData);
 
-    // SERVER
-    const newTask = await createTask(createdTask);
-    addTaskToDom(newTask);
+    const createdTask = await createTask(newTask);
+    addTaskToDom(createdTask);
   } else {
     nameInput.classList.toggle("invalid", true);
   }
 });
+
+function convertFormDataToTask(formData) {
+  const task = Object.assign(formData);
+  task.dueDate = formData.dueDate ? new Date(formData.dueDate) : null;
+  return task;
+}
 
 function isFormValid(formData) {
   return formData.name;
