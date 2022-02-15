@@ -1,4 +1,4 @@
-const list = [
+const taskList = [
   {
     id: 1,
     listId: 2,
@@ -94,11 +94,11 @@ function handleClick(taskElem) {
 
 function deleteTask(taskElem) {
   const taskId = parseInt(taskElem.getAttribute("id"));
-  const taskIndex = list.findIndex((task) => task.id === taskId);
-  list.splice(taskIndex, 1);
+  const taskIndex = taskList.findIndex((task) => task.id === taskId);
+  taskList.splice(taskIndex, 1);
 
   taskElem.remove();
-  console.log(list);
+  console.log(taskList);
 }
 
 function changeTaskState(taskElem) {
@@ -118,13 +118,6 @@ function isDateExpired(date) {
     return false;
   }
 }
-
-list.forEach((task) => addTaskToDom(task));
-
-const showOnlyCompletedButton = document.getElementById("show-all");
-showOnlyCompletedButton.addEventListener("click", (event) => {
-  displayTasksAccordingToQuery();
-});
 
 function displayTasksAccordingToQuery() {
   if (showOnlyCompletedButton.checked) {
@@ -157,6 +150,13 @@ function makeTaskVisible(task) {
   task.classList.toggle("none", false);
 }
 
+taskList.forEach((task) => addTaskToDom(task));
+
+const showOnlyCompletedButton = document.getElementById("show-all");
+showOnlyCompletedButton.addEventListener("click", (event) => {
+  displayTasksAccordingToQuery();
+});
+
 const createTaskForm = document.forms.createTask;
 createTaskForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -172,7 +172,7 @@ createTaskForm.addEventListener("submit", (event) => {
     const createdTask = Object.assign(formData);
     createdTask.dueDate = formData.dueDate ? new Date(formData.dueDate) : null;
 
-    list.push(createdTask);
+    taskList.push(createdTask);
     addTaskToDom(createdTask);
   } else {
     nameInput.classList.toggle("invalid", true);
