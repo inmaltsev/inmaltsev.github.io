@@ -31,9 +31,7 @@ function createTask(newTask) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newTask),
-  }).then((res) => {
-    return res.json();
-  });
+  }).then((res) => res.json());
 }
 
 const taskListElement = document.getElementById("taskList");
