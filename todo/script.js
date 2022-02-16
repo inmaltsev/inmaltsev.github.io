@@ -14,7 +14,7 @@ function deleteTaskFromServer(taskId) {
   });
 }
 
-function updateTask(editedTask) {
+function updateTaskOnServer(editedTask) {
   return fetch(tasksEndpoint + `/${editedTask.id}`, {
     method: "PATCH",
     headers: {
@@ -76,7 +76,7 @@ function renderTaskElement(task) {
   }
 }
 
-function addElementToDom(htmlTask) {
+function addTaskToDom(htmlTask) {
   taskListElement.appendChild(htmlTask);
 }
 
@@ -107,8 +107,7 @@ function handleClick(taskElem) {
   allClasses.includes = [].includes;
 
   if (allClasses.includes("form-check-input")) {
-    changeTaskElementState(taskElem);
-    displayTasksAccordingToQuery();
+    changeTaskElementState(taskElem).then(() => displayTasksAccordingToQuery());
   } else if (allClasses.includes("todolist__task-delete")) {
     deleteTask(taskElem);
   }
@@ -128,7 +127,7 @@ async function changeTaskElementState(taskElement) {
 
   task.done = !task.done;
 
-  const updatedTask = await updateTask(task);
+  const updatedTask = await updateTaskOnServer(task);
 
   const updatedTaskElement = renderTaskElement(updatedTask);
   taskElement.parentNode.replaceChild(updatedTaskElement, taskElement);
@@ -139,8 +138,7 @@ function getTaskFromElement(taskElement) {
   const text = taskElement.querySelector(
     ".todolist__task-description"
   ).textContent;
-  const date = taskElement.getAttribute("date");
-  const dueDate = date === "null" ? null : date;
+  const dueDate = taskElement.getAttribute("date");
   const done = taskElement.getAttribute("done") === "true";
   const id = parseInt(taskElement.getAttribute("id"));
 
@@ -191,7 +189,7 @@ function makeTaskVisible(task) {
 
 // DOM
 getTasksFromServer().then((res) =>
-  res.map(renderTaskElement).forEach(addElementToDom)
+  res.map(renderTaskElement).forEach(addTaskToDom)
 );
 
 // EVENT
@@ -216,7 +214,7 @@ createTaskForm.addEventListener("submit", async (event) => {
     const newTask = convertFormDataToTask(formData);
 
     const createdTask = await createTask(newTask);
-    addElementToDom(renderTaskElement(createdTask));
+    addTaskToDom(renderTaskElement(createdTask));
   } else {
     nameInput.classList.toggle("invalid", true);
   }
