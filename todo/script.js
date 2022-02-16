@@ -39,7 +39,7 @@ function createTask(newTask) {
 const taskListElement = document.getElementById("taskList");
 
 // DOM
-function createElementFromTask(task) {
+function renderTaskElement(task) {
   const { id, text, done, dueDate, name } = task;
   const taskDate = getDateOrNull(dueDate);
   const isExpired = isDateExpired(taskDate);
@@ -59,7 +59,9 @@ function createElementFromTask(task) {
 
     taskElement.setAttribute("id", id);
     taskElement.setAttribute("done", done);
-    taskElement.setAttribute("date", getLocalDate(taskDate));
+    if (taskDate) {
+      taskElement.setAttribute("date", taskDate.toLocaleDateString());
+    }
     taskElement.setAttribute("onclick", "handleClick(this)");
 
     checkbox.checked = done;
@@ -82,16 +84,6 @@ function formatDate(date) {
   if (date) {
     return (
       date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
-    );
-  } else {
-    return "";
-  }
-}
-
-function getLocalDate(date) {
-  if (date) {
-    return (
-      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
     );
   } else {
     return "";
@@ -138,7 +130,7 @@ async function changeTaskElementState(taskElement) {
 
   const updatedTask = await updateTask(task);
 
-  const updatedTaskElement = createElementFromTask(updatedTask);
+  const updatedTaskElement = renderTaskElement(updatedTask);
   taskElement.parentNode.replaceChild(updatedTaskElement, taskElement);
 }
 
@@ -147,7 +139,8 @@ function getTaskFromElement(taskElement) {
   const text = taskElement.querySelector(
     ".todolist__task-description"
   ).textContent;
-  const dueDate = taskElement.getAttribute("date");
+  const date = taskElement.getAttribute("date");
+  const dueDate = date === "null" ? null : date;
   const done = taskElement.getAttribute("done") === "true";
   const id = parseInt(taskElement.getAttribute("id"));
 
@@ -198,7 +191,7 @@ function makeTaskVisible(task) {
 
 // DOM
 getTasksFromServer().then((res) =>
-  res.map(createElementFromTask).forEach(addElementToDom)
+  res.map(renderTaskElement).forEach(addElementToDom)
 );
 
 // EVENT
@@ -223,7 +216,7 @@ createTaskForm.addEventListener("submit", async (event) => {
     const newTask = convertFormDataToTask(formData);
 
     const createdTask = await createTask(newTask);
-    addElementToDom(createElementFromTask(createdTask));
+    addElementToDom(renderTaskElement(createdTask));
   } else {
     nameInput.classList.toggle("invalid", true);
   }
