@@ -59,6 +59,7 @@ function createElementFromTask(task) {
 
     taskElement.setAttribute("id", id);
     taskElement.setAttribute("done", done);
+    taskElement.setAttribute("date", getLocalDate(taskDate));
     taskElement.setAttribute("onclick", "handleClick(this)");
 
     checkbox.checked = done;
@@ -67,7 +68,7 @@ function createElementFromTask(task) {
     descriptionField.textContent = text;
 
     dateField.setAttribute("expired", isExpired);
-    dateField.textContent = getDateText(taskDate);
+    dateField.textContent = formatDate(taskDate);
 
     return taskElement;
   }
@@ -77,7 +78,17 @@ function addElementToDom(htmlTask) {
   taskListElement.appendChild(htmlTask);
 }
 
-function getDateText(date) {
+function formatDate(date) {
+  if (date) {
+    return (
+      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
+    );
+  } else {
+    return "";
+  }
+}
+
+function getLocalDate(date) {
   if (date) {
     return (
       date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
@@ -136,7 +147,7 @@ function getTaskFromElement(taskElement) {
   const text = taskElement.querySelector(
     ".todolist__task-description"
   ).textContent;
-  const date = taskElement.querySelector(".todolist__task-date").textContent;
+  const dueDate = taskElement.getAttribute("date");
   const done = taskElement.getAttribute("done") === "true";
   const id = parseInt(taskElement.getAttribute("id"));
 
@@ -145,7 +156,7 @@ function getTaskFromElement(taskElement) {
     name,
     text,
     done,
-    dueDate: getDateOrNull(date),
+    dueDate,
   };
 }
 
