@@ -41,7 +41,7 @@ const taskListElement = document.getElementById("taskList");
 // DOM
 function createElementFromTask(task) {
   const { id, text, done, dueDate, name } = task;
-  const taskDate = dueDate ? new Date(dueDate) : null;
+  const taskDate = getDateOrNull(dueDate);
   const isExpired = isDateExpired(taskDate);
 
   const browserSupportsTemplate =
@@ -145,8 +145,12 @@ function getTaskFromElement(taskElement) {
     name,
     text,
     done,
-    dueDate: new Date(date),
+    dueDate: getDateOrNull(date),
   };
+}
+
+function getDateOrNull(dateString) {
+  return dateString ? new Date(dateString) : null;
 }
 
 // DOM
@@ -216,7 +220,7 @@ createTaskForm.addEventListener("submit", async (event) => {
 
 function convertFormDataToTask(formData) {
   const task = Object.assign(formData);
-  task.dueDate = formData.dueDate ? new Date(formData.dueDate) : null;
+  task.dueDate = getDateOrNull(formData.dueDate);
   return task;
 }
 
