@@ -6,7 +6,7 @@ function getTasksFromServer() {
 }
 
 function deleteTaskFromServer(taskId) {
-  fetch(tasksEndpoint + `/${taskId}`, {
+  return fetch(tasksEndpoint + `/${taskId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -114,9 +114,7 @@ function handleClick(taskElem) {
 // COMB
 function deleteTask(taskElem) {
   const taskId = parseInt(taskElem.getAttribute("id"));
-  deleteTaskFromServer(taskId);
-
-  taskElem.remove();
+  deleteTaskFromServer(taskId).then((_) => taskElem.remove());
 }
 
 // COMB : update task
